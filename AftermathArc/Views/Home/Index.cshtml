@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AftermathArc.Models.podcastinfo>
+@{
+    ViewBag.Title = "Aftermath Arc";
+}
+<div class="row">
+    <div class="col-md-12">
+        <img src="~/Images/pexels-photo-373524.jpeg" alt="imagePod" class="img-responsive" style="width:100%; height:85%;">
+        <h1 class="centered" style="color:white">Aftermath Arc Podcast</h1>
+    </div>
+</div>
+
+<div class="text-center" style="padding-top:0px;">
+    <h1>Podcast</h1>
+</div>
+
+
+@foreach (var item in Model)
+{
+    <div class="container" style="padding-top:100px;">
+
+        @if (item.ID == Model.Count())
+        {
+            <h3>@item.podcastName</h3>
+            <p>@item.Description</p>
+            <audio style="width:100%;" controls class="embed-responsive-item">
+
+
+                <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+
+            </audio>
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+        }
+    </div>
+}
+
+ @foreach (var item in Model)
+ {
+     <div class="container" style="padding-top:100px;">
+
+         @if (item.ID == Model.Count()-1)
+         {
+             <h3>@item.podcastName</h3>
+             <p>@item.Description</p>
+             <audio style="width:100%;" controls class="embed-responsive-item">
+
+
+                 <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+
+             </audio>
+             @Html.ActionLink("Details", "Details", new { id = item.ID })
+         }
+     </div>
+ }
+
+@foreach (var item in Model)
+{
+    <div class="container" style="padding-top:100px;">
+
+        @if (item.ID == Model.Count()-2)
+        {
+            <h3>@item.podcastName</h3>
+            <p>@item.Description</p>
+            <audio style="width:100%;" controls class="embed-responsive-item">
+
+
+                <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+
+            </audio>
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+        }
+    </div>
+}

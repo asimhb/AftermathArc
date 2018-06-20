@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AftermathArc.Models.podcastinfo>
+
+@{
+    ViewBag.Title = "List Of Podcast";
+}
+
+<h2>List Of All Podcasts</h2>
+
+
+@foreach (var item in Model)
+{
+<div class="container" style="padding-top:100px;">
+
+
+        <h3>@item.podcastName</h3>
+        <p>@item.Description</p>
+        <audio style="width:100%;" controls class="embed-responsive-item">
+
+
+            <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+
+        </audio>
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+</div>
+}
