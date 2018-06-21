@@ -14,59 +14,23 @@
 </div>
 
 
-@foreach (var item in Model)
+@foreach (var item in Model.Reverse().Take(3))
 {
-    <div class="container" style="padding-top:100px;">
-
-        @if (item.ID == Model.Count())
-        {
-            <h3>@item.podcastName</h3>
-            <p>@item.Description</p>
-            <audio style="width:100%;" controls class="embed-responsive-item">
+  <div class="container" style="padding-top:100px;">
 
 
-                <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+      <H3>@item.ID</H3>
+      <h3>@item.podcastName</h3>
+      <p>@item.Description</p>
+      <audio style="width:100%;" controls class="embed-responsive-item">
 
-            </audio>
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-        }
-    </div>
-}
+     
+          <source src="@Html.DisplayFor(modelItem => item.audioPath)">
 
- @foreach (var item in Model)
- {
-     <div class="container" style="padding-top:100px;">
+      </audio>
+      @Html.ActionLink("Details", "Details", new { id = item.ID })
 
-         @if (item.ID == Model.Count()-1)
-         {
-             <h3>@item.podcastName</h3>
-             <p>@item.Description</p>
-             <audio style="width:100%;" controls class="embed-responsive-item">
-
-
-                 <source src="@Html.DisplayFor(modelItem => item.audioPath)">
-
-             </audio>
-             @Html.ActionLink("Details", "Details", new { id = item.ID })
-         }
-     </div>
- }
-
-@foreach (var item in Model)
-{
-    <div class="container" style="padding-top:100px;">
-
-        @if (item.ID == Model.Count()-2)
-        {
-            <h3>@item.podcastName</h3>
-            <p>@item.Description</p>
-            <audio style="width:100%;" controls class="embed-responsive-item">
-
-
-                <source src="@Html.DisplayFor(modelItem => item.audioPath)">
-
-            </audio>
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-        }
-    </div>
+  
+  </div>
+  
 }

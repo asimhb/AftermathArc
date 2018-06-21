@@ -186,8 +186,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\heavy-rain-daniel_simon.wav" />
+    <Content Include="Audio\heavy-rain-daniel_simon.wav" />
+    <Content Include="Images\Code.jpg" />
+    <Content Include="Images\Create.jpg" />
     <Content Include="Images\pexels-photo-373524.jpeg" />
+    <Content Include="Images\Road.jpg" />
     <Content Include="Models\PodcastModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PodcastModel.edmx</DependentUpon>
