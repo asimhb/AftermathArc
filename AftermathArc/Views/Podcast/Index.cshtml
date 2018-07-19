@@ -5,18 +5,27 @@
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/scripts")
-<h2>List Of All Podcasts</h2>
+<br>
+<h2 class="text-center">List Of All Podcasts</h2>
 <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
 <script src="~/Scripts/Scripts.js"></script>
 <script>
     audioPlayer();
 </script>
+<!--Check if admin-->
+@if (User.Identity.Name == "")
+{
+    <h2>@Html.ActionLink("Submit New Podcast", "Create")</h2>
+}
 @foreach (var item in Model)
 {
-<div class="container" style="padding-top:100px;">
-    <h3 class="">@Html.ActionLink(item.podcastName, "Details", new { id = item.ID })</h3>
-    <p>@item.Description</p>
-    
-
-</div>
+    <div class="container" style="padding-top:100px;">
+        <h3 class="">@Html.ActionLink(item.podcastName, "Details", new { id = item.ID })</h3>
+        <p>@item.Description</p>
+        <!--Check if admin-->
+        @if (User.Identity.Name == "")
+        {
+            <div>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</div>
+        }
+    </div>
 }

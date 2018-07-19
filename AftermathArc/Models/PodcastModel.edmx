@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="podcastdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="podcastdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="podcast_comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comment" Type="longtext" />
+          <Property Name="commentDate" Type="datetime" Precision="0" />
+          <Property Name="username" Type="varchar" MaxLength="256" />
+          <Property Name="podcast_id" Type="int" />
+        </EntityType>
         <EntityType Name="podcastinfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -17,10 +27,10 @@
           <Property Name="releaseDate" Type="datetime" Precision="0" />
         </EntityType>
         <EntityContainer Name="podcastdbModelStoreContainer">
+          <EntitySet Name="podcast_comments" EntityType="Self.podcast_comments" Schema="podcastdb" store:Type="Tables" />
           <EntitySet Name="podcastinfo" EntityType="Self.podcastinfo" Schema="podcastdb" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="podcastdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,7 +47,18 @@
         </EntityType>
         <EntityContainer Name="podcastdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="podcastinfoes" EntityType="Self.podcastinfo" />
+          <EntitySet Name="podcast_comments" EntityType="podcastdbModel.podcast_comments" />
         </EntityContainer>
+        <EntityType Name="podcast_comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comment" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="commentDate" Type="DateTime" />
+          <Property Name="username" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="podcast_id" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,6 +74,17 @@
                 <ScalarProperty Name="imagePath" ColumnName="imagePath" />
                 <ScalarProperty Name="audioPath" ColumnName="audioPath" />
                 <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="podcast_comments">
+            <EntityTypeMapping TypeName="podcastdbModel.podcast_comments">
+              <MappingFragment StoreEntitySet="podcast_comments">
+                <ScalarProperty Name="podcast_id" ColumnName="podcast_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

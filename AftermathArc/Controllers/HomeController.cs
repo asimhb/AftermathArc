@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AftermathArc.Models;
+
 namespace AftermathArc.Controllers
 {
     public class HomeController : Controller
@@ -12,7 +13,7 @@ namespace AftermathArc.Controllers
         
         public ActionResult Index()
         {
-            int lastValue = db.podcastinfoes.Count();
+            
             return View(db.podcastinfoes.ToList());
         }
 

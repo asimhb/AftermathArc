@@ -26,5 +26,6 @@ namespace AftermathArc.Models
         }
     
         public virtual DbSet<podcastinfo> podcastinfoes { get; set; }
+        public virtual DbSet<podcast_comments> podcast_comments { get; set; }
     }
 }
