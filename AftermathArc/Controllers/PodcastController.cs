@@ -17,6 +17,8 @@ namespace AftermathArc.Controllers
         public ActionResult Index()
         {
             return View(db.podcastinfoes.ToList());
+            
+      
         }
         public ActionResult Details(int? id)
         {
@@ -25,6 +27,7 @@ namespace AftermathArc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             podcastinfo info = db.podcastinfoes.Find(id);
+            podcast_comments comment = db.podcast_comments.Find(id);
             if (info == null)
             {
                 return HttpNotFound();
@@ -83,9 +86,57 @@ namespace AftermathArc.Controllers
             }
             return View(podcastinfo);
         }
-        public ActionResult PodcastComments()
+
+        // GET: podcastinfo/Create
+        public ActionResult AddPodcastComments()
         {
-            return View();
+            //Check if admin
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return HttpNotFound();
+            }
+            return PartialView();
         }
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPodcastComments(podcast_comments podcast_comments)
+        {
+            if (ModelState.IsValid)
+            {
+                if (podcast_comments.comment != null)
+                {
+                    podcast_comments.commentDate = DateTime.Now;
+                    podcast_comments.username = User.Identity.Name;
+                    db.podcast_comments.Add(podcast_comments);
+                    db.SaveChanges();
+                    return RedirectToAction("Details/" + podcast_comments.podcast_id);
+                }
+                else
+                {
+                    TempData["Message"] = "Please enter a comment";
+                    return RedirectToAction("Details/" + podcast_comments.podcast_id);
+                }
+            }
+
+            return PartialView(podcast_comments);
+        }
+        // GET: podcastinfo/Create
+        public ActionResult DiplayComments(int? id)
+        {
+            //Check if admin
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            podcast_comments info = db.podcast_comments.Find(id);
+            if (info == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(info);
+        }
+ 
+
     }
 }

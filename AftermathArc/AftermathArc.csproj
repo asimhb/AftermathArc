@@ -373,6 +373,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Podcast\Edit.cshtml" />
     <Content Include="Views\Podcast\Create.cshtml" />
+    <Content Include="Views\Podcast\_AddPodcastComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

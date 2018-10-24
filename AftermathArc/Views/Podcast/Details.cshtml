@@ -1,5 +1,6 @@
 ﻿@model AftermathArc.Models.podcastinfo
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -44,16 +45,16 @@
             </dd>
 
         </dl>
-        <hr />
-        @if (User.Identity.IsAuthenticated == true)
-        {
-            <div class="form-group">
-                <strong>Comment:</strong>
-                <textarea class="form-control" style="min-width: 100%"></textarea><br>
-                <button type="submit" class="btn btn-dark">Submit</button>
-            </div>
-            
+
+        @{
+            string message = TempData["Message"] as string;
+            if (message != null)
+            {
+                <b>@message</b>
+            }
         }
+
+        @Html.Partial("_AddPodcastComments", new AftermathArc.Models.podcast_comments())
 
     </div>
 
