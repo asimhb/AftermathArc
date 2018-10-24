@@ -6,4 +6,4 @@ There are alot of features i will be addeding.
 -Admin page.
 -Cleaning the code.
 -Improving the Design.
--and much more features to add.
+-and much more features to added.
