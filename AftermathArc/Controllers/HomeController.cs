@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AftermathArc.Models;
+using AftermathArc.ViewModels;
 
 namespace AftermathArc.Controllers
 {
@@ -30,5 +31,6 @@ namespace AftermathArc.Controllers
 
             return View();
         }
+  
     }
 }

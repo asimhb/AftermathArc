@@ -16,23 +16,23 @@
 
 @foreach (var item in Model.Reverse().Take(3))
 {
-<div class="container" style="padding-top:100px;">
+    <div class="container" style="padding-top:100px;">
 
-    <h3>@item.podcastName</h3>
-    <div class="row">
-        <div class="col-md-12">
-            <img src="@item.imagePath" alt="imagePod" class="img-responsive" style="width:100%; height:80%">
+        <h3>@item.podcastName</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="@item.imagePath" alt="imagePod" class="img-responsive" style="width:100%; height:80%">
+            </div>
         </div>
+        <p>@item.Description</p>
+        <audio style="width:100%;" controls class="embed-responsive-item">
+
+            <source src="@Html.DisplayFor(modelItem => item.audioPath)">
+
+        </audio>
+        @Html.ActionLink("Details", "Details", "Podcast", new { id = item.ID }, null)
+
     </div>
-    <p>@item.Description</p>
-    <audio style="width:100%;" controls class="embed-responsive-item">
-
-        <source src="@Html.DisplayFor(modelItem => item.audioPath)">
-
-    </audio>
-    @Html.ActionLink("Details", "Details", "Podcast", new { id = item.ID }, null)
-
-</div>
-
 }
+
 

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AftermathArc.ViewModels.BlogViewModel>
+<div>
+    <div>
+        <br />
+        <strong> Comments</strong>
+    </div><br>
+
+
+    @foreach (var item in Model)
+    {
+    <div class="container">
+        <div class="row">
+            <strong> @item.usernameView </strong>&nbsp;&nbsp;&nbsp;
+            <div style="color: #9199a1;  font-size: 14px;">@item.commentDateView</div>
+        </div>
+            <div class="row" style="word-break: break-all">
+                @item.commentsView
+            </div>
+        
+    </div>
+        <br />
+
+    }
+</div>   
+  

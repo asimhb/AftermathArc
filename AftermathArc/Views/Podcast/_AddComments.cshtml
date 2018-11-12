@@ -1,7 +1,7 @@
 ﻿@model AftermathArc.Models.podcast_comments
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("AddPodcastComments", "Podcast", FormMethod.Post))
+    using (Html.BeginForm("_AddComments", "Podcast", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">
@@ -9,9 +9,7 @@
                 @Html.Hidden("podcast_id", ViewContext.RouteData.Values["id"])
                 @Html.TextAreaFor(model => model.comment, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="submit" class="btn btn-default" />
-                </div>
+                <input type="submit" value="submit" class="btn btn-default" />
             </div>
         </div>
         <div>

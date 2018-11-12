@@ -1,6 +1,5 @@
 ﻿@model AftermathArc.Models.podcastinfo
 
-
 @{
     ViewBag.Title = "Details";
 }
@@ -42,6 +41,13 @@
             <dd>
                 <br />
                 @Html.DisplayFor(model => model.releaseDate)
+                <hr />
+            </dd>
+
+            
+            <dd>
+                <br />
+                @{Html.RenderAction("_DiplayComments", new { @id = Model.ID });}
             </dd>
 
         </dl>
@@ -53,8 +59,7 @@
                 <b>@message</b>
             }
         }
-
-        @Html.Partial("_AddPodcastComments", new AftermathArc.Models.podcast_comments())
+        @Html.Partial("_AddComments", new AftermathArc.Models.podcast_comments())
 
     </div>
 

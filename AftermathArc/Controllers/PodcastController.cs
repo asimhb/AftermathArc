@@ -7,12 +7,16 @@ using System.Data.Entity;
 using AftermathArc.Models;
 using System.Data;
 using System.Net;
+using AftermathArc.ViewModels;
 
 namespace AftermathArc.Controllers
 {
     public class PodcastController : Controller
     {
-        private podcastdbEntities db = new podcastdbEntities();
+        public podcastdbEntities db = new podcastdbEntities();
+        List<object> listBlogInfo = new List<object>();
+        public readonly string userAdmin  = "";
+        
         // GET: Podcast
         public ActionResult Index()
         {
@@ -39,7 +43,7 @@ namespace AftermathArc.Controllers
         public ActionResult Create()
         {
             //Check if admin
-            if(User.Identity.Name != "")
+            if(User.Identity.Name != userAdmin)
             {
                 return HttpNotFound();
             }
@@ -63,12 +67,12 @@ namespace AftermathArc.Controllers
         }
         public ActionResult Edit(int? id)
         {
-            if (id == null || User.Identity.Name != "")
+            if (id == null || User.Identity.Name != userAdmin)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             podcastinfo podcastinfo = db.podcastinfoes.Find(id);
-            if (podcastinfo == null || User.Identity.Name != "")
+            if (podcastinfo == null || User.Identity.Name != userAdmin)
             {
                 return HttpNotFound();
             }
@@ -100,8 +104,9 @@ namespace AftermathArc.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPodcastComments(podcast_comments podcast_comments)
+        public ActionResult _AddComments(podcast_comments podcast_comments)
         {
+
             if (ModelState.IsValid)
             {
                 if (podcast_comments.comment != null)
@@ -122,19 +127,26 @@ namespace AftermathArc.Controllers
             return PartialView(podcast_comments);
         }
         // GET: podcastinfo/Create
-        public ActionResult DiplayComments(int? id)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public PartialViewResult _DiplayComments(int? id)
         {
-            //Check if admin
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            podcast_comments info = db.podcast_comments.Find(id);
-            if (info == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView(info);
+      
+            podcastinfo info = db.podcastinfoes.Find(id);
+            
+            var queryTwo = (from pc in db.podcast_comments
+                        join pn in db.podcastinfoes on pc.podcast_id equals pn.ID
+                        where pn.ID == info.ID
+                        select new BlogViewModel()
+                        {
+                            commentsView = pc.comment,
+                            commentDateView = pc.commentDate,
+                            usernameView = pc.username
+                            
+
+                        }).ToList();
+
+            return PartialView("_DiplayComments", queryTwo);
         }
  
 

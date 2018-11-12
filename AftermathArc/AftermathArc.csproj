@@ -211,6 +211,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\podcastinfo.cs">
@@ -373,7 +374,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Podcast\Edit.cshtml" />
     <Content Include="Views\Podcast\Create.cshtml" />
-    <Content Include="Views\Podcast\_AddPodcastComments.cshtml" />
+    <Content Include="Views\Podcast\_AddComments.cshtml" />
+    <Content Include="Views\Podcast\_DiplayComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

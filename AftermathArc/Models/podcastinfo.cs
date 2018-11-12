@@ -21,4 +21,5 @@ namespace AftermathArc.Models
         public string audioPath { get; set; }
         public Nullable<System.DateTime> releaseDate { get; set; }
     }
+
 }
